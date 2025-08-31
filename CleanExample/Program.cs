@@ -12,6 +12,10 @@ namespace CleanExample
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+            builder.Services.AddDbContext<EnterpriseDbContext>(option => option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
             // Add services to the container.
 
             builder.Services.AddControllers();
