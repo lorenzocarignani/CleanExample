@@ -11,11 +11,15 @@ namespace Infraestruture.Repository
 
         public void Add(Employee entity)
         {
-            entity.Id = _context.Employees.Count + 1;
             _context.Employees.Add(entity);
+            _context.SaveChanges();
         }
 
-        public void Delete(Employee entity) => _context.Employees.Remove(entity);
+        public void Delete(Employee entity)
+        {
+            _context.Employees.Remove(entity);
+            _context.SaveChanges();
+        }
 
         public Employee? Get(int id) => _context.Employees.FirstOrDefault(e => e.Id == id);
 

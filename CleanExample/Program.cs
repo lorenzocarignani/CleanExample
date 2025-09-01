@@ -1,8 +1,10 @@
-
+﻿
 using Application.UseCases;
 using Domain.Interfaces;
 using Infraestruture.Context;
 using Infraestruture.Repository;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace CleanExample
 {
@@ -13,14 +15,18 @@ namespace CleanExample
             var builder = WebApplication.CreateBuilder(args);
 
 
-            builder.Services.AddDbContext<EnterpriseDbContext>(option => option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<EnterpriseDbContext>(options =>
+                     options.UseSqlite(
+                     builder.Configuration.GetConnectionString("DefaultConnection"),
+                     b => b.MigrationsAssembly("Infraestruture")
+            ));
 
 
             // Add services to the container.
 
             builder.Services.AddControllers();
 
-            builder.Services.AddSingleton<EnterpriseDbContext>();
+            builder.Services.AddScoped<EnterpriseDbContext>();
             builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<CompanyService>();

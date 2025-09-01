@@ -12,11 +12,14 @@ namespace Infraestruture.Repository
 
         public void Add(Company entity)
         {
-            entity.Id = _context.Companies.Count + 1;
             _context.Companies.Add(entity);
+            _context.SaveChanges();
         }
 
-        public void Delete(Company entity) => _context.Companies.Remove(entity);
+        public void Delete(Company entity) {
+            _context.Companies.Remove(entity);
+            _context.SaveChanges();
+            }
 
         public Company? Get(int id) => _context.Companies.FirstOrDefault(c => c.Id == id);
 

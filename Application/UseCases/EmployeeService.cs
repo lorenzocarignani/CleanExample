@@ -30,7 +30,6 @@ namespace Application.UseCases
                 Age = dto.Age,
                 Position = dto.Position,
                 CompanyId = dto.CompanyId,
-                Company = company
             };
             _employeeRepository.Add(employee);
             company.Employees.Add(employee);

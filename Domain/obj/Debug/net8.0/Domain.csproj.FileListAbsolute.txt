@@ -10,3 +10,15 @@ D:\VsRepos\CleanExample\Domain\obj\Debug\net8.0\Domain.dll
 D:\VsRepos\CleanExample\Domain\obj\Debug\net8.0\refint\Domain.dll
 D:\VsRepos\CleanExample\Domain\obj\Debug\net8.0\Domain.pdb
 D:\VsRepos\CleanExample\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\Repositorios\CleanExample\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\Repositorios\CleanExample\Domain\bin\Debug\net8.0\Domain.dll
+C:\Repositorios\CleanExample\Domain\bin\Debug\net8.0\Domain.pdb
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\Domain.dll
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\Domain.pdb
+C:\Repositorios\CleanExample\Domain\obj\Debug\net8.0\ref\Domain.dll
