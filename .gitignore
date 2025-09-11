@@ -1,0 +1,27 @@
+./vs
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.useros
+*.sln.docstates
+
+# Package files
+*.nupkg
+*.snk
+packages/
+node_modules/
+
+# Rider files
+.idea/
+
+# Azure Web App publish files
+*.pubxml
+*.publishproj
