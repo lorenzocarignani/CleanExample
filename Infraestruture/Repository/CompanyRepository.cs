@@ -1,28 +1,42 @@
-﻿
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
 using Infraestruture.Context;
+using Microsoft.EntityFrameworkCore;
 
-
-namespace Infraestruture.Repository
+public class CompanyRepository : ICompanyRepository
 {
-    public class CompanyRepository : ICompanyRepository
+    private readonly EnterpriseDbContext _context;
+
+    public CompanyRepository(EnterpriseDbContext context) => _context = context;
+
+    public async Task AddAsync(Company entity)
     {
-        private readonly EnterpriseDbContext _context;
-        public CompanyRepository(EnterpriseDbContext context) => _context = context;
-
-        public void Add(Company entity)
-        {
-            _context.Companies.Add(entity);
-            _context.SaveChanges();
-        }
-
-        public void Delete(Company entity) {
-            _context.Companies.Remove(entity);
-            _context.SaveChanges();
-            }
-
-        public Company? Get(int id) => _context.Companies.FirstOrDefault(c => c.Id == id);
-
-        public IEnumerable<Company> GetAll() => _context.Companies;
+        await _context.Companies.AddAsync(entity);
     }
+
+    public async Task DeleteAsync(Company entity)
+    {
+        _context.Companies.Remove(entity);
+        await Task.CompletedTask;
+    }
+
+    public async Task<Company?> GetByIdAsync(int id) =>
+        await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
+
+    public async Task<IEnumerable<Company>> GetAllAsync() =>
+        await _context.Companies.ToListAsync();
+
+    public async Task SaveChangesAsync() =>
+        await _context.SaveChangesAsync();
+
+    // Métodos personalizados
+    public async Task<Company?> GetCompanyWithEmployeesAsync(int id) =>
+        await _context.Companies
+            .Include(c => c.Employees)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+    public async Task<IEnumerable<Company>> GetCompaniesByCountryAsync(string country) =>
+        await _context.Companies
+            .Where(c => c.Country.ToLower() == country.ToLower())
+            .ToListAsync();
 }
+

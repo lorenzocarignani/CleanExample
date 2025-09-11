@@ -4,7 +4,7 @@ namespace Infraestruture.Context
 {
     public class EnterpriseDbContext : DbContext
     {
-        public DbSet<Employee> Employees {  get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Company> Companies { get; set; }
 
         public EnterpriseDbContext(DbContextOptions<EnterpriseDbContext> options) : base(options) { }
@@ -20,7 +20,12 @@ namespace Infraestruture.Context
                 .HasForeignKey(e => e.CompanyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            
+            // Índices para mejorar performance
+            modelBuilder.Entity<Employee>()
+                .HasIndex(e => e.CompanyId);
+
+            modelBuilder.Entity<Company>()
+                .HasIndex(c => c.Name);
         }
     }
 }

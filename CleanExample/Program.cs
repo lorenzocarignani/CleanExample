@@ -1,8 +1,8 @@
 ﻿
 using Application.UseCases;
+using Application.UseCases.Interfaces;
 using Domain.Interfaces;
 using Infraestruture.Context;
-using Infraestruture.Repository;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -27,10 +27,15 @@ namespace CleanExample
             builder.Services.AddControllers();
 
             builder.Services.AddScoped<EnterpriseDbContext>();
+
+
+            // Repositories
             builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            builder.Services.AddScoped<CompanyService>();
-            builder.Services.AddScoped<EmployeeService>();
+
+            // Services
+            builder.Services.AddScoped<ICompanyService, CompanyService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
