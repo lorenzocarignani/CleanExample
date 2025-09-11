@@ -1,7 +1,8 @@
 ﻿public interface IRepositoryBase<T>
 {
-    void Add(T entity);
-    void Delete(T entity);
-    IEnumerable<T> GetAll();
-    T? Get(int id);
+    Task AddAsync(T entity);
+    Task DeleteAsync(T entity);
+    Task<IEnumerable<T>> GetAllAsync();
+    Task<T?> GetByIdAsync(int id);
+    Task SaveChangesAsync();
 }

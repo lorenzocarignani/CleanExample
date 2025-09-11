@@ -1,24 +1,51 @@
 ﻿
 using Domain.Interfaces;
 using Infraestruture.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infraestruture.Repository
 {
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly EnterpriseDbContext _context;
+
         public EmployeeRepository(EnterpriseDbContext context) => _context = context;
 
-        public void Add(Employee entity)
+        public async Task AddAsync(Employee entity)
         {
-            entity.Id = _context.Employees.Count + 1;
-            _context.Employees.Add(entity);
+            await _context.Employees.AddAsync(entity);
         }
 
-        public void Delete(Employee entity) => _context.Employees.Remove(entity);
+        public async Task DeleteAsync(Employee entity)
+        {
+            _context.Employees.Remove(entity);
+            await Task.CompletedTask;
+        }
 
-        public Employee? Get(int id) => _context.Employees.FirstOrDefault(e => e.Id == id);
+        public async Task<Employee?> GetByIdAsync(int id) =>
+            await _context.Employees
+                .Include(e => e.Company)
+                .FirstOrDefaultAsync(e => e.Id == id);
 
-        public IEnumerable<Employee> GetAll() => _context.Employees;
+        public async Task<IEnumerable<Employee>> GetAllAsync() =>
+            await _context.Employees
+                .Include(e => e.Company)
+                .ToListAsync();
+
+        public async Task SaveChangesAsync() =>
+            await _context.SaveChangesAsync();
+
+        // Métodos personalizados
+        public async Task<IEnumerable<Employee>> GetEmployeesByCompanyIdAsync(int companyId) =>
+            await _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.CompanyId == companyId)
+                .ToListAsync();
+
+        public async Task<IEnumerable<Employee>> GetEmployeesByPositionAsync(string position) =>
+            await _context.Employees
+                .Include(e => e.Company)
+                .Where(e => e.Position.ToLower().Contains(position.ToLower()))
+                .ToListAsync();
     }
 }

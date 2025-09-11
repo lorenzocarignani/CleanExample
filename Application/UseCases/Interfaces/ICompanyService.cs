@@ -4,9 +4,11 @@ namespace Application.UseCases.Interfaces
 {
     public interface ICompanyService
     {
-        void Add(CreateCompanyDto dto);
-        void Delete(int id);
-        List<Company> GetAll();
-        Company GetById(int id);
+        Task<int> CreateCompanyAsync(CreateCompanyDto dto);
+        Task DeleteCompanyAsync(int id);
+        Task<List<CompanyDto>> GetAllCompaniesAsync();
+        Task<CompanyDto?> GetCompanyByIdAsync(int id);
+        Task<CompanyDto?> GetCompanyWithEmployeesAsync(int id);
+        Task<List<CompanyDto>> GetCompaniesByCountryAsync(string country);
     }
 }

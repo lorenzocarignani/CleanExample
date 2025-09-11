@@ -1,26 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.DTOs
 {
-    public class CreateEmployeeDto
+    public class EmployeeDto
     {
-        [Required]
-        [MaxLength(50)]
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
-        [Required]
-        [Range(18, 100)]
         public int Age { get; set; }
-
-        [MaxLength(100)]
         public string Position { get; set; } = string.Empty;
-
-        [Required]
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
     }
 }
